@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jade Noir - Élégance & Discrétion</title>
+    
+    <style>
+        /* Import de la police pour un style épuré */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+
+        :root {
+            --color-dark: #1a1a1a;
+            --color-light: #ffffff;
+            --color-accent: #8e8d8e; /* Une teinte de jade sombre ou d'argent */
+        }
+
+        /* Style de base */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            text-align: center;
+        }
+
+        /* En-tête (Header) */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            border-bottom: 1px solid var(--color-accent);
+        }
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--color-accent);
+            letter-spacing: 3px;
+        }
+
+        nav a {
+            color: var(--color-light);
+            text-decoration: none;
+            margin-left: 25px;
+            font-weight: 300;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-accent);
+        }
+
+        /* Section Héro (Main) */
+        .hero {
+            height: 80vh; /* 80% de la hauteur de la fenêtre */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-bottom: 30px;
+            color: var(--color-accent);
+        }
+
+        /* Bouton CTA (Call to Action) */
+        #cta-button {
+            background-color: var(--color-accent);
+            color: var(--color-dark);
+            border: none;
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        #cta-button:hover {
+            background-color: var(--color-light);
+            transform: translateY(-2px);
+        }
+
+        /* Zone de message JS */
+        #message-zone {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: 1px solid var(--color-accent);
+            background-color: rgba(142, 141, 142, 0.1);
+            color: var(--color-light);
+            font-style: italic;
+            max-width: 400px;
+            opacity: 1;
+            transition: opacity 0.5s;
+        }
+
+        .hidden {
+            opacity: 0;
+            pointer-events: none; /* Rendre l'élément non cliquable quand caché */
+        }
+    </style>
+    
+</head>
+<body>
+
+    <header>
+        <div class="logo">JADE NOIR</div>
+        <nav>
+            <a href="#">Services</a>
+            <a href="#">Modèles</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
+
+    <main class="hero">
+        <h1>Votre Partenaire d'Événements Privés.</h1>
+        <p>Le raffinement de l'esthétique coréenne & japonaise, au service de vos soirées et dîners exclusifs.</p>
+        
+        <button id="cta-button">Découvrir l'Expérience</button>
+        
+        <div id="message-zone" class="hidden">
+            Merci de votre intérêt. Contactez-nous pour une consultation privée.
+        </div>
+    </main>
+
+    <script>
+        // Attendre que le contenu HTML soit complètement chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. Sélectionner les éléments du DOM
+            const ctaButton = document.getElementById('cta-button');
+            const messageZone = document.getElementById('message-zone');
+
+            // 2. Définir la fonction à exécuter au clic
+            function handleCtaClick() {
+                // Toggle (bascule) la classe 'hidden' sur la zone de message
+                messageZone.classList.toggle('hidden');
+                
+                // Optionnel : Changer le texte du bouton après le premier clic
+                if (ctaButton.textContent === "Découvrir l'Expérience") {
+                    ctaButton.textContent = "Fermer le Message";
+                } else {
+                    ctaButton.textContent = "Découvrir l'Expérience";
+                }
+            }
+
+            // 3. Ajouter l'écouteur d'événement (Event Listener) au bouton
+            ctaButton.addEventListener('click', handleCtaClick);
+
+        });
+    </script> 
+</body>
+</html>

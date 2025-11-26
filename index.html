@@ -4,34 +4,74 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jade Noir - Élégance & Discrétion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Import de la police pour un style épuré */
-        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap');
+        /* Import de polices pour un style épuré */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
 
         :root {
-            --color-dark: #1a1a1a;
-            --color-light: #ffffff;
-            --color-accent: #8e8d8e; /* Une teinte de jade sombre ou d'argent */
+            --color-dark: #0a0a0a;
+            --color-light: #f5f5f5;
+            --color-accent: #5d8a82; /* Teinte de jade */
+            --color-accent-light: #8ab4ad;
+            --color-gold: #d4af37;
+            --section-padding: 80px 20px;
         }
 
         /* Style de base */
-        body {
-            font-family: 'Montserrat', sans-serif;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
             background-color: var(--color-dark);
             color: var(--color-light);
-            text-align: center;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        section {
+            padding: var(--section-padding);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         /* En-tête (Header) */
         header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 40px;
-            border-bottom: 1px solid var(--color-accent);
+            background-color: rgba(10, 10, 10, 0.9);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            padding: 15px 40px;
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
 
         .logo {
@@ -39,129 +79,667 @@
             font-weight: 700;
             color: var(--color-accent);
             letter-spacing: 3px;
+            text-decoration: none;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
         }
 
         nav a {
             color: var(--color-light);
             text-decoration: none;
             margin-left: 25px;
-            font-weight: 300;
+            font-weight: 400;
             transition: color 0.3s;
+            font-size: 0.9em;
+            position: relative;
+        }
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: width 0.3s;
         }
 
         nav a:hover {
             color: var(--color-accent);
         }
 
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-light);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
         /* Section Héro (Main) */
         .hero {
-            height: 80vh; /* 80% de la hauteur de la fenêtre */
+            height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 0 20px;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1926&q=80') no-repeat center center/cover;
+            position: relative;
         }
 
         .hero h1 {
-            font-size: 3em;
-            margin-bottom: 10px;
-            font-weight: 700;
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 2px;
         }
 
         .hero p {
             font-size: 1.2em;
             font-weight: 300;
-            margin-bottom: 30px;
-            color: var(--color-accent);
+            margin-bottom: 40px;
+            color: var(--color-accent-light);
+            max-width: 600px;
         }
 
         /* Bouton CTA (Call to Action) */
-        #cta-button {
-            background-color: var(--color-accent);
-            color: var(--color-dark);
-            border: none;
+        .cta-button {
+            background-color: transparent;
+            color: var(--color-light);
+            border: 1px solid var(--color-accent);
             padding: 15px 30px;
             font-size: 1em;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
+            transition: all 0.3s;
             text-transform: uppercase;
             letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        #cta-button:hover {
-            background-color: var(--color-light);
-            transform: translateY(-2px);
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--color-accent);
+            transition: all 0.5s;
+            z-index: -1;
         }
 
-        /* Zone de message JS */
-        #message-zone {
-            margin-top: 20px;
-            padding: 10px 20px;
-            border: 1px solid var(--color-accent);
-            background-color: rgba(142, 141, 142, 0.1);
+        .cta-button:hover {
+            color: var(--color-dark);
+        }
+
+        .cta-button:hover:before {
+            left: 0;
+        }
+
+        /* Section À Propos */
+        .about {
+            background-color: var(--color-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background-color: var(--color-accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .about-text h3 {
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Section Services */
+        .services {
+            background-color: #111;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(93, 138, 130, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--color-accent);
+        }
+
+        .service-icon {
+            font-size: 2.5em;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .service-card p {
+            font-weight: 300;
+            color: #ccc;
+        }
+
+        /* Section Modèles */
+        .models {
+            background-color: var(--color-dark);
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .model-card {
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .model-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .model-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 10, 10, 0.9));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .model-card:hover .model-overlay {
+            transform: translateY(0);
+        }
+
+        .model-card:hover .model-image {
+            transform: scale(1.05);
+        }
+
+        .model-name {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .model-spec {
+            font-size: 0.9em;
+            color: var(--color-accent-light);
+        }
+
+        /* Section Contact */
+        .contact {
+            background-color: #111;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-detail i {
+            margin-right: 15px;
+            color: var(--color-accent);
+            width: 20px;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 300;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             color: var(--color-light);
-            font-style: italic;
-            max-width: 400px;
-            opacity: 1;
-            transition: opacity 0.5s;
+            border-radius: 3px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
         }
 
-        .hidden {
-            opacity: 0;
-            pointer-events: none; /* Rendre l'élément non cliquable quand caché */
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(93, 138, 130, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--color-light);
+            margin: 0 10px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .copyright {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav a {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
         }
     </style>
-    
 </head>
 <body>
-
-    <header>
-        <div class="logo">JADE NOIR</div>
-        <nav>
-            <a href="#">Services</a>
-            <a href="#">Modèles</a>
-            <a href="#">Contact</a>
+    <!-- En-tête -->
+    <header id="header">
+        <a href="#" class="logo">JADE NOIR</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="mainNav">
+            <a href="#about">À Propos</a>
+            <a href="#services">Services</a>
+            <a href="#models">Modèles</a>
+            <a href="#contact">Contact</a>
         </nav>
     </header>
 
-    <main class="hero">
-        <h1>Votre Partenaire d'Événements Privés.</h1>
-        <p>Le raffinement de l'esthétique coréenne & japonaise, au service de vos soirées et dîners exclusifs.</p>
-        
-        <button id="cta-button">Découvrir l'Expérience</button>
-        
-        <div id="message-zone" class="hidden">
-            Merci de votre intérêt. Contactez-nous pour une consultation privée.
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="container">
+            <h1>L'Élégance Asiatique Réinventée</h1>
+            <p>Jade Noir incarne le raffinement et la discrétion au service de vos événements exclusifs. Une expérience unique mêlant esthétique coréenne et japonaise.</p>
+            <a href="#contact" class="cta-button">RÉSERVER MAINTENANT</a>
         </div>
-    </main>
+    </section>
+
+    <!-- Section À Propos -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">À Propos de Jade Noir</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Notre Philosophie</h3>
+                    <p>Fondée sur les principes d'élégance, de discrétion et d'excellence, Jade Noir réinvente l'art de l'accompagnement pour les événements privés et professionnels. Notre approche s'inspire des codes esthétiques coréens et japonais, alliant modernité et tradition.</p>
+                    <p>Nous sélectionnons rigoureusement nos modèles pour leur prestance, leur éducation et leur capacité à s'adapter à toutes les situations sociales. Chaque collaborateur Jade Noir incarne les valeurs de notre maison : raffinement, discrétion et professionnalisme.</p>
+                    <p>Que ce soit pour un dîner d'affaires, un événement mondain ou une soirée privée, Jade Noir vous garantit une expérience unique et mémorable.</p>
+                </div>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Élégance Jade Noir">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Soirées & Événements</h3>
+                    <p>Accompagnement discret et raffiné pour vos soirées privées, galas et événements mondains. Nos modèles sauront rehausser le prestige de votre événement.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Dîners d'Affaires</h3>
+                    <p>Présence élégante pour vos rendez-vous professionnels et dîners d'affaires. Nos collaborateurs maîtrisent l'art de la conversation et des codes sociaux.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Présence Événementielle</h3>
+                    <p>Représentation de marque et accueil prestigieux pour vos salons, lancements produits et événements corporate. L'image parfaite pour votre entreprise.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Séances Photo</h3>
+                    <p>Modèles professionnels pour vos campagnes publicitaires, éditoriales de mode ou projets créatifs. Une esthétique unique et raffinée.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Modèles -->
+    <section id="models" class="models">
+        <div class="container">
+            <h2 class="section-title">Nos Modèles</h2>
+            <div class="models-grid">
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 1" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Kenji</h3>
+                        <p class="model-spec">185cm • Japon • Élégance Classique</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 2" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Min-ho</h3>
+                        <p class="model-spec">182cm • Corée • Style Moderne</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 3" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Ren</h3>
+                        <p class="model-spec">188cm • Japon • Raffinement Urbain</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 4" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Joon</h3>
+                        <p class="model-spec">180cm • Corée • Élégance Discrète</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact & Réservation</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Prenez Rendez-vous</h3>
+                    <p>Pour toute demande de réservation ou information complémentaire, n'hésitez pas à nous contacter. Notre équipe vous répondra dans les plus brefs délais.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+33 1 45 67 89 10</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@jadenoir.com</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Paris, France</span>
+                        </div>
+                    </div>
+                    
+                    <p><em>Discrétion et confidentialité absolues garanties.</em></p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-type">Type d'événement</label>
+                            <select id="event-type" class="form-control" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="soiree">Soirée privée</option>
+                                <option value="diner">Dîner d'affaires</option>
+                                <option value="evenement">Événement professionnel</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date souhaitée</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Décrivez vos besoins et attentes..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">ENVOYER LA DEMANDE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="copyright">© 2023 Jade Noir. Tous droits réservés.</p>
+        </div>
+    </footer>
 
     <script>
-        // Attendre que le contenu HTML soit complètement chargé
-        document.addEventListener('DOMContentLoaded', function() {
-            
-            // 1. Sélectionner les éléments du DOM
-            const ctaButton = document.getElementById('cta-button');
-            const messageZone = document.getElementById('message-zone');
-
-            // 2. Définir la fonction à exécuter au clic
-            function handleCtaClick() {
-                // Toggle (bascule) la classe 'hidden' sur la zone de message
-                messageZone.classList.toggle('hidden');
-                
-                // Optionnel : Changer le texte du bouton après le premier clic
-                if (ctaButton.textContent === "Découvrir l'Expérience") {
-                    ctaButton.textContent = "Fermer le Message";
-                } else {
-                    ctaButton.textContent = "Découvrir l'Expérience";
-                }
-            }
-
-            // 3. Ajouter l'écouteur d'événement (Event Listener) au bouton
-            ctaButton.addEventListener('click', handleCtaClick);
-
+        // Menu mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
         });
-    </script> 
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Form submission
+        const reservationForm = document.getElementById('reservationForm');
+        
+        reservationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci pour votre demande. Nous vous contacterons très prochainement.');
+            reservationForm.reset();
+        });
+    </script>
 </body>
 </html>
