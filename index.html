@@ -3,324 +3,743 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logo Jade Noir - Concepts</title>
+    <title>Jade Noir - Élégance & Discrétion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
+        /* Import de polices pour un style épuré */
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap');
+
+        :root {
+            --color-dark: #0a0a0a;
+            --color-light: #f5f5f5;
+            --color-accent: #5d8a82; /* Teinte de jade */
+            --color-accent-light: #8ab4ad;
+            --color-gold: #d4af37;
+            --section-padding: 80px 20px;
+        }
+
+        /* Style de base */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: #f5f5f5;
-            min-height: 100vh;
-            padding: 40px 20px;
+
+        html {
+            scroll-behavior: smooth;
         }
-        
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--color-dark);
+            color: var(--color-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        section {
+            padding: var(--section-padding);
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
-        
-        h1 {
-            text-align: center;
-            margin-bottom: 50px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            color: #5d8a82;
+
+        /* En-tête (Header) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background-color: rgba(10, 10, 10, 0.9);
+            z-index: 1000;
+            transition: all 0.3s ease;
         }
-        
-        .logo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-bottom: 60px;
+
+        header.scrolled {
+            padding: 15px 40px;
+            background-color: rgba(10, 10, 10, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
         }
-        
-        .logo-card {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            padding: 30px;
-            text-align: center;
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: 1px solid rgba(93, 138, 130, 0.2);
+
+        .logo {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: var(--color-accent);
+            letter-spacing: 3px;
+            text-decoration: none;
         }
-        
-        .logo-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        .logo-preview {
-            height: 200px;
+
+        nav {
             display: flex;
             align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
         }
-        
-        .logo-title {
-            font-size: 1.2em;
-            margin-bottom: 10px;
-            color: #8ab4ad;
-        }
-        
-        .logo-desc {
-            font-size: 0.9em;
-            color: #ccc;
-            line-height: 1.5;
-        }
-        
-        .usage-section {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 10px;
-            padding: 40px;
-            margin-top: 50px;
-            border: 1px solid rgba(93, 138, 130, 0.1);
-        }
-        
-        .usage-title {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #5d8a82;
-        }
-        
-        .usage-examples {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            justify-content: center;
-        }
-        
-        .usage-item {
-            background: rgba(10, 10, 10, 0.7);
-            padding: 20px;
-            border-radius: 8px;
-            min-width: 200px;
-            text-align: center;
-        }
-        
-        .usage-item svg {
-            margin-bottom: 15px;
-        }
-        
-        .instructions {
-            margin-top: 50px;
-            text-align: center;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-            line-height: 1.6;
-        }
-        
-        .instructions h2 {
-            margin-bottom: 20px;
-            color: #5d8a82;
-        }
-        
-        .instructions p {
-            margin-bottom: 15px;
-            color: #ccc;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 30px;
-            background: transparent;
-            color: #5d8a82;
-            border: 1px solid #5d8a82;
-            border-radius: 5px;
+
+        nav a {
+            color: var(--color-light);
             text-decoration: none;
-            transition: all 0.3s;
-            font-weight: 500;
+            margin-left: 25px;
+            font-weight: 400;
+            transition: color 0.3s;
+            font-size: 0.9em;
+            position: relative;
         }
-        
+
+        nav a:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--color-accent);
+            transition: width 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--color-accent);
+        }
+
+        nav a:hover:after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--color-light);
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+
+        /* Section Héro (Main) */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0 20px;
+            text-align: center;
+            background: linear-gradient(rgba(10, 10, 10, 0.7), rgba(10, 10, 10, 0.9)), url('https://images.unsplash.com/photo-1552058544-f2b08422138a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1926&q=80') no-repeat center center/cover;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5em;
+            margin-bottom: 20px;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: var(--color-accent-light);
+            max-width: 600px;
+        }
+
+        /* Bouton CTA (Call to Action) */
+        .cta-button {
+            background-color: transparent;
+            color: var(--color-light);
+            border: 1px solid var(--color-accent);
+            padding: 15px 30px;
+            font-size: 1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .cta-button:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--color-accent);
+            transition: all 0.5s;
+            z-index: -1;
+        }
+
         .cta-button:hover {
-            background: #5d8a82;
-            color: #0a0a0a;
+            color: var(--color-dark);
+        }
+
+        .cta-button:hover:before {
+            left: 0;
+        }
+
+        /* Section À Propos */
+        .about {
+            background-color: var(--color-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 2px;
+            background-color: var(--color-accent);
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text {
+            flex: 1;
+            text-align: left;
+        }
+
+        .about-text h3 {
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .about-image {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Section Services */
+        .services {
+            background-color: #111;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s;
+            border: 1px solid rgba(93, 138, 130, 0.2);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--color-accent);
+        }
+
+        .service-icon {
+            font-size: 2.5em;
+            color: var(--color-accent);
+            margin-bottom: 20px;
+        }
+
+        .service-card h3 {
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .service-card p {
+            font-weight: 300;
+            color: #ccc;
+        }
+
+        /* Section Modèles */
+        .models {
+            background-color: var(--color-dark);
+        }
+
+        .models-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+        }
+
+        .model-card {
+            position: relative;
+            border-radius: 5px;
+            overflow: hidden;
+            height: 350px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .model-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .model-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 10, 10, 0.9));
+            padding: 20px;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+        }
+
+        .model-card:hover .model-overlay {
+            transform: translateY(0);
+        }
+
+        .model-card:hover .model-image {
+            transform: scale(1.05);
+        }
+
+        .model-name {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+
+        .model-spec {
+            font-size: 0.9em;
+            color: var(--color-accent-light);
+        }
+
+        /* Section Contact */
+        .contact {
+            background-color: #111;
+        }
+
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+
+        .contact-info {
+            flex: 1;
+        }
+
+        .contact-info h3 {
+            margin-bottom: 20px;
+            color: var(--color-accent);
+        }
+
+        .contact-details {
+            margin-bottom: 30px;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .contact-detail i {
+            margin-right: 15px;
+            color: var(--color-accent);
+            width: 20px;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 300;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--color-light);
+            border-radius: 3px;
+            font-family: 'Montserrat', sans-serif;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--color-accent);
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        /* Pied de page */
+        footer {
+            background-color: #0a0a0a;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid rgba(93, 138, 130, 0.2);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: var(--color-light);
+            margin: 0 10px;
+            font-size: 1.2em;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--color-accent);
+        }
+
+        .copyright {
+            font-size: 0.9em;
+            color: #777;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+            
+            nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: rgba(10, 10, 10, 0.95);
+                flex-direction: column;
+                padding: 20px 0;
+            }
+            
+            nav.active {
+                display: flex;
+            }
+            
+            nav a {
+                margin: 10px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-title {
+                font-size: 1.8em;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Concepts de Logo pour Jade Noir</h1>
-        
-        <div class="logo-grid">
-            <!-- Logo 1: Élégance Minimaliste -->
-            <div class="logo-card">
-                <div class="logo-preview">
-                    <svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#5d8a82" />
-                                <stop offset="100%" stop-color="#8ab4ad" />
-                            </linearGradient>
-                        </defs>
-                        <rect x="10" y="50" width="160" height="4" fill="url(#grad1)" />
-                        <rect x="10" y="65" width="140" height="2" fill="url(#grad1)" />
-                        <text x="90" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#5d8a82">JADE NOIR</text>
-                    </svg>
-                </div>
-                <h3 class="logo-title">Élégance Minimaliste</h3>
-                <p class="logo-desc">Lignes épurées et typographie fine pour une esthétique contemporaine et sophistiquée.</p>
-            </div>
-            
-            <!-- Logo 2: Jade Symbolique -->
-            <div class="logo-card">
-                <div class="logo-preview">
-                    <svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#5d8a82" />
-                                <stop offset="100%" stop-color="#3a615a" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M90,30 C70,30 50,50 50,70 C50,90 70,90 90,90 C110,90 130,90 130,70 C130,50 110,30 90,30 Z" fill="url(#grad2)" opacity="0.8" />
-                        <path d="M90,35 C73,35 55,50 55,70 C55,85 70,85 90,85 C110,85 125,85 125,70 C125,50 107,35 90,35 Z" fill="none" stroke="#f5f5f5" stroke-width="1.5" />
-                        <text x="90" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#8ab4ad">JADE NOIR</text>
-                    </svg>
-                </div>
-                <h3 class="logo-title">Jade Symbolique</h3>
-                <p class="logo-desc">Pierre de jade stylisée évoquant la valeur, la rareté et l'élégance asiatique.</p>
-            </div>
-            
-            <!-- Logo 3: Calligraphie Moderne -->
-            <div class="logo-card">
-                <div class="logo-preview">
-                    <svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#5d8a82" />
-                                <stop offset="100%" stop-color="#d4af37" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M30,50 Q50,30 70,50 T110,50 T150,50" fill="none" stroke="url(#grad3)" stroke-width="3" />
-                        <path d="M40,70 Q60,90 80,70 T120,70 T160,70" fill="none" stroke="url(#grad3)" stroke-width="3" />
-                        <text x="90" y="110" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-style="italic" fill="#8ab4ad">Jade Noir</text>
-                    </svg>
-                </div>
-                <h3 class="logo-title">Calligraphie Moderne</h3>
-                <p class="logo-desc">Traits fluides inspirés de la calligraphie asiatique, alliant tradition et modernité.</p>
-            </div>
-            
-            <!-- Logo 4: Monogramme Luxueux -->
-            <div class="logo-card">
-                <div class="logo-preview">
-                    <svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#5d8a82" />
-                                <stop offset="100%" stop-color="#2c4842" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="90" cy="60" r="40" fill="none" stroke="url(#grad4)" stroke-width="2" />
-                        <text x="90" y="70" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="bold" fill="url(#grad4)">JN</text>
-                    </svg>
-                </div>
-                <h3 class="logo-title">Monogramme Luxueux</h3>
-                <p class="logo-desc">Initiales entrelacées dans un cercle, symbole d'exclusivité et de raffinement.</p>
-            </div>
-            
-            <!-- Logo 5: Équilibre Asiatique -->
-            <div class="logo-card">
-                <div class="logo-preview">
-                    <svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#5d8a82" />
-                                <stop offset="50%" stop-color="#8ab4ad" />
-                                <stop offset="100%" stop-color="#5d8a82" />
-                            </linearGradient>
-                        </defs>
-                        <circle cx="60" cy="50" r="25" fill="none" stroke="url(#grad5)" stroke-width="2" />
-                        <circle cx="120" cy="50" r="25" fill="none" stroke="url(#grad5)" stroke-width="2" />
-                        <path d="M60,75 L120,75" stroke="url(#grad5)" stroke-width="2" />
-                        <text x="90" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#8ab4ad">JADE NOIR</text>
-                    </svg>
-                </div>
-                <h3 class="logo-title">Équilibre Asiatique</h3>
-                <p class="logo-desc">Représentation du yin et yang moderne, symbolisant l'harmonie et l'équilibre.</p>
-            </div>
-            
-            <!-- Logo 6: Signature Discrète -->
-            <div class="logo-card">
-                <div class="logo-preview">
-                    <svg width="180" height="120" viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
-                        <defs>
-                            <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="0%">
-                                <stop offset="0%" stop-color="#5d8a82" />
-                                <stop offset="100%" stop-color="#8ab4ad" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M40,50 Q60,30 80,50 T120,50" fill="none" stroke="url(#grad6)" stroke-width="2" />
-                        <path d="M40,70 Q60,90 80,70 T120,70" fill="none" stroke="url(#grad6)" stroke-width="2" />
-                        <text x="90" y="100" text-anchor="middle" font-family="'Brush Script MT', cursive" font-size="24" fill="url(#grad6)">Jade Noir</text>
-                    </svg>
-                </div>
-                <h3 class="logo-title">Signature Discrète</h3>
-                <p class="logo-desc">Signature élégante évoquant la confidentialité et le service personnalisé.</p>
-            </div>
+    <!-- En-tête -->
+    <header id="header">
+        <a href="#" class="logo">JADE NOIR</a>
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav id="mainNav">
+            <a href="#about">À Propos</a>
+            <a href="#services">Services</a>
+            <a href="#models">Modèles</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <!-- Section Héro -->
+    <section class="hero">
+        <div class="container">
+            <h1>L'Élégance Asiatique Réinventée</h1>
+            <p>Jade Noir incarne le raffinement et la discrétion au service de vos événements exclusifs. Une expérience unique mêlant esthétique coréenne et japonaise.</p>
+            <a href="#contact" class="cta-button">RÉSERVER MAINTENANT</a>
         </div>
-        
-        <div class="usage-section">
-            <h2 class="usage-title">Exemples d'utilisation</h2>
-            <div class="usage-examples">
-                <div class="usage-item">
-                    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="10" y="10" width="60" height="60" fill="none" stroke="#5d8a82" stroke-width="2" />
-                        <rect x="15" y="35" width="50" height="3" fill="#5d8a82" />
-                        <rect x="15" y="45" width="40" height="2" fill="#5d8a82" />
-                        <text x="40" y="25" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#5d8a82">JN</text>
-                    </svg>
-                    <p>En-tête de site web</p>
+    </section>
+
+    <!-- Section À Propos -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">À Propos de Jade Noir</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Notre Philosophie</h3>
+                    <p>Fondée sur les principes d'élégance, de discrétion et d'excellence, Jade Noir réinvente l'art de l'accompagnement pour les événements privés et professionnels. Notre approche s'inspire des codes esthétiques coréens et japonais, alliant modernité et tradition.</p>
+                    <p>Nous sélectionnons rigoureusement nos modèles pour leur prestance, leur éducation et leur capacité à s'adapter à toutes les situations sociales. Chaque collaborateur Jade Noir incarne les valeurs de notre maison : raffinement, discrétion et professionnalisme.</p>
+                    <p>Que ce soit pour un dîner d'affaires, un événement mondain ou une soirée privée, Jade Noir vous garantit une expérience unique et mémorable.</p>
                 </div>
-                
-                <div class="usage-item">
-                    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="5" y="5" width="70" height="70" rx="10" fill="none" stroke="#5d8a82" stroke-width="2" />
-                        <rect x="15" y="30" width="50" height="3" fill="#5d8a82" />
-                        <rect x="15" y="40" width="40" height="2" fill="#5d8a82" />
-                        <text x="40" y="20" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#5d8a82">JADE NOIR</text>
-                    </svg>
-                    <p>Application mobile</p>
-                </div>
-                
-                <div class="usage-item">
-                    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                        <rect x="10" y="20" width="60" height="40" fill="none" stroke="#5d8a82" stroke-width="2" />
-                        <rect x="15" y="40" width="50" height="2" fill="#5d8a82" />
-                        <rect x="15" y="45" width="40" height="1.5" fill="#5d8a82" />
-                        <text x="40" y="35" text-anchor="middle" font-family="Arial, sans-serif" font-size="8" fill="#5d8a82">JADE NOIR</text>
-                    </svg>
-                    <p>Carte de visite</p>
-                </div>
-                
-                <div class="usage-item">
-                    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="40" cy="40" r="35" fill="none" stroke="#5d8a82" stroke-width="2" />
-                        <rect x="20" y="35" width="40" height="2" fill="#5d8a82" />
-                        <rect x="25" y="40" width="30" height="1.5" fill="#5d8a82" />
-                        <text x="40" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="#5d8a82">JN</text>
-                    </svg>
-                    <p>Favicon</p>
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1589156280159-27698a70f29e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Élégance Jade Noir">
                 </div>
             </div>
         </div>
-        
-        <div class="instructions">
-            <h2>Comment utiliser ces logos</h2>
-            <p>Ces concepts de logo sont fournis en format SVG, parfaitement adaptés pour le web.</p>
-            <p>Vous pouvez copier le code SVG de chaque logo et l'intégrer directement dans votre site web.</p>
-            <p>Pour une utilisation professionnelle, nous recommandons de faire finaliser le logo par un graphiste qui pourra :</p>
-            <p>- Créer des versions haute résolution</p>
-            <p>- Développer un guide d'utilisation complet</p>
-            <p>- Adapter le logo pour tous supports (print, textile, etc.)</p>
-            
-            <a href="#" class="cta-button">Télécharger tous les concepts</a>
+    </section>
+
+    <!-- Section Services -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2 class="section-title">Nos Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-glass-cheers"></i>
+                    </div>
+                    <h3>Soirées & Événements</h3>
+                    <p>Accompagnement discret et raffiné pour vos soirées privées, galas et événements mondains. Nos modèles sauront rehausser le prestige de votre événement.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <h3>Dîners d'Affaires</h3>
+                    <p>Présence élégante pour vos rendez-vous professionnels et dîners d'affaires. Nos collaborateurs maîtrisent l'art de la conversation et des codes sociaux.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-user-tie"></i>
+                    </div>
+                    <h3>Présence Événementielle</h3>
+                    <p>Représentation de marque et accueil prestigieux pour vos salons, lancements produits et événements corporate. L'image parfaite pour votre entreprise.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3>Séances Photo</h3>
+                    <p>Modèles professionnels pour vos campagnes publicitaires, éditoriales de mode ou projets créatifs. Une esthétique unique et raffinée.</p>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
+
+    <!-- Section Modèles -->
+    <section id="models" class="models">
+        <div class="container">
+            <h2 class="section-title">Nos Modèles</h2>
+            <div class="models-grid">
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 1" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Kenji</h3>
+                        <p class="model-spec">185cm • Japon • Élégance Classique</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 2" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Min-ho</h3>
+                        <p class="model-spec">182cm • Corée • Style Moderne</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 3" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Ren</h3>
+                        <p class="model-spec">188cm • Japon • Raffinement Urbain</p>
+                    </div>
+                </div>
+                <div class="model-card">
+                    <img src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Modèle 4" class="model-image">
+                    <div class="model-overlay">
+                        <h3 class="model-name">Joon</h3>
+                        <p class="model-spec">180cm • Corée • Élégance Discrète</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Section Contact -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Contact & Réservation</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Prenez Rendez-vous</h3>
+                    <p>Pour toute demande de réservation ou information complémentaire, n'hésitez pas à nous contacter. Notre équipe vous répondra dans les plus brefs délais.</p>
+                    
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>+33 1 45 67 89 10</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-envelope"></i>
+                            <span>contact@jadenoir.com</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Paris, France</span>
+                        </div>
+                    </div>
+                    
+                    <p><em>Discrétion et confidentialité absolues garanties.</em></p>
+                </div>
+                
+                <div class="contact-form">
+                    <form id="reservationForm">
+                        <div class="form-group">
+                            <label for="name">Nom complet</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-type">Type d'événement</label>
+                            <select id="event-type" class="form-control" required>
+                                <option value="">Sélectionnez...</option>
+                                <option value="soiree">Soirée privée</option>
+                                <option value="diner">Dîner d'affaires</option>
+                                <option value="evenement">Événement professionnel</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Date souhaitée</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" class="form-control" placeholder="Décrivez vos besoins et attentes..."></textarea>
+                        </div>
+                        <button type="submit" class="cta-button">ENVOYER LA DEMANDE</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p class="copyright">© 2023 Jade Noir. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mainNav = document.getElementById('mainNav');
+        
+        mobileMenuBtn.addEventListener('click', function() {
+            mainNav.classList.toggle('active');
+        });
+        
+        // Header scroll effect
+        const header = document.getElementById('header');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('nav a').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetElement.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                mainNav.classList.remove('active');
+            });
+        });
+        
+        // Form submission
+        const reservationForm = document.getElementById('reservationForm');
+        
+        reservationForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Merci pour votre demande. Nous vous contacterons très prochainement.');
+            reservationForm.reset();
+        });
+    </script>
 </body>
 </html>
